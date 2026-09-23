@@ -40,6 +40,25 @@ def listar_motorista_id(motorista_id: int, db: Session = Depends (get_db)):
         raise HTTPException(status_code=404, detail="Motorista não encontrado")
     return db_motorista
 
+    # ATUALIZAR
+@app.put("/motoristas/{motorista_id}", response_model=schemas.MotoristaResponse)
+def atualizar_motorista(motorista_id: int, updating_motorista: schemas.MotoristaCreate, db: Session = Depends(get_db)):
+
+    db_motorista = crud.update_motorista(db=db,motorista_id=motorista_id,updating_motorista=updating_motorista)
+
+    if db_motorista is None:
+        raise HTTPException(status_code=404, detail="Motorista não encontrado")
+    return db_motorista
+
+    # DELETAR
+@app.delete("/motoristas/{motorista_id}", response_model=schemas.MotoristaResponse)
+def deletar_motorista(motorista_id: int, db:Session = Depends(get_db)):
+    db_motorista = crud.delete_motorista(db=db, motorista_id=motorista_id)
+
+    if db_motorista is None:
+        raise HTTPException(status_code=404, detail="Motorista não encontrado")
+    return db_motorista
+
 # MÉTODOS - VENDEDORES
 
     # CRIAR
@@ -56,6 +75,24 @@ def listar_vendedores(skip: int = 0, limit: int = 100, db: Session = Depends(get
 @app.get("/vendedores/{vendedor_id}", response_model=schemas.VendedorResponse)
 def listar_vendedor_id(vendedor_id: int, db:Session = Depends(get_db)):
     db_vendedor = crud.get_vendedor_by_id(db=db, vendedor_id=vendedor_id)
+
+    if db_vendedor is None:
+        raise HTTPException(status_code=404, detail="Vendedor não encontrado")
+    return db_vendedor
+
+    # ATUALIZAR
+@app.put("/vendedores/{vendedor_id}", response_model=schemas.VendedorResponse)
+def atualizar_vendedor(vendedor_id: int, updating_vendedor: schemas.VendedorCreate, db: Session = Depends(get_db)):
+    db_vendedor = crud.update_vendedor(db=db, vendedor_id=vendedor_id, updating_vendedor=updating_vendedor)
+
+    if db_vendedor is None:
+        raise HTTPException(status_code=404, detail="Vendedor não encontrado")
+    return db_vendedor
+
+    # DELETAR
+@app.delete("/vendedores/{vendedor_id}", response_model=schemas.VendedorResponse)
+def deletar_vendedor(vendedor_id: int, db:Session = Depends(get_db)):
+    db_vendedor = crud.delete_vendedor(db=db, vendedor_id=vendedor_id)
 
     if db_vendedor is None:
         raise HTTPException(status_code=404, detail="Vendedor não encontrado")
@@ -82,6 +119,24 @@ def listar_ajudante_id(ajudante_id: int, db:Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Ajudante não encontrado")
     return db_ajudante
 
+    # ATUALIZAR
+@app.put("/ajudantes/{ajudante_id}", response_model=schemas.AjudanteResponse)
+def atualizar_ajudante(ajudante_id: int, updating_ajudante: schemas.AjudanteCreate, db:Session = Depends(get_db)):
+    db_ajudante = crud.update_ajudante(db=db, ajudante_id=ajudante_id, updating_ajudante=updating_ajudante)
+
+    if db_ajudante is None:
+        raise HTTPException(status_code=404, detail="Ajudante não encontrado")
+    return db_ajudante
+
+    # DELETAR
+@app.delete("/ajudantes/{ajudante_id}", response_model=schemas.AjudanteResponse)
+def deletar_ajudante(ajudante_id: int, db: Session = Depends(get_db)):
+    db_ajudante = crud.delete_ajudante(db=db, ajudante_id=ajudante_id)
+
+    if db_ajudante is None:
+        raise HTTPException(status_code=404, detail="Ajudante não encontrado")
+    return db_ajudante
+
 # MÉTODOS - VEÍCULOS
 
     # CRIAR
@@ -98,6 +153,24 @@ def listar_veiculos(skip: int=0, limit: int=100, db:Session = Depends(get_db)):
 @app.get("/veiculos/{veiculo_id}", response_model=schemas.VeiculoResponse)
 def listar_veiculo_id(veiculo_id: int, db:Session = Depends(get_db)):
     db_veiculo = crud.get_veiculo_by_id(db=db, veiculo_id=veiculo_id)
+
+    if db_veiculo is None:
+        raise HTTPException(status_code=404, detail="Veículo não encontrado")
+    return db_veiculo
+
+    # ATUALIZAR
+@app.put("/veiculos/{veiculo_id}", response_model=schemas.VeiculoResponse)
+def atualizar_veiculo(veiculo_id: int, updating_veiculo: schemas.VeiculoCreate, db: Session = Depends(get_db)):
+    db_veiculo = crud.update_veiculo(db=db, veiculo_id=veiculo_id, updating_veiculo=updating_veiculo)
+
+    if db_veiculo is None:
+        raise HTTPException(status_code=404, detail="Veículo não encontrado")
+    return db_veiculo
+
+    # DELETAR
+@app.delete("/veiculos/{veiculo_id}", response_model=schemas.VeiculoResponse)
+def deletar_veiculo(veiculo_id: int, db: Session = Depends(get_db)):
+    db_veiculo = crud.delete_veiculo(db=db, veiculo_id=veiculo_id)
 
     if db_veiculo is None:
         raise HTTPException(status_code=404, detail="Veículo não encontrado")
@@ -124,6 +197,24 @@ def listar_ciclo_id(ciclo_id: int, db:Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Ciclo não encontrado")
     return db_ciclo_id
 
+    # ATUALIZAR
+@app.put("/ciclos/{ciclo_id}", response_model=schemas.CicloResponse)
+def atualizar_ciclo(ciclo_id: int, updating_ciclo: schemas.CicloCreate, db: Session = Depends(get_db)):
+    db_ciclo = crud.update_ciclo(db=db, ciclo_id=ciclo_id, updating_ciclo=updating_ciclo)
+
+    if db_ciclo is None:
+        raise HTTPException(status_code=404, detail="Ciclo não encontrado")
+    return db_ciclo
+
+    # DELETAR
+@app.delete("/ciclos/{ciclo_id}", response_model=schemas.CicloResponse)
+def deletar_ciclo(ciclo_id: int, db:Session = Depends(get_db)):
+    db_ciclo = crud.delete_ciclo(db=db, ciclo_id=ciclo_id)
+
+    if db_ciclo is None:
+        raise HTTPException(status_code=404, detail="Ciclo não encontrado")
+    return db_ciclo
+
 # MÉTODOS - PACOTES
 
     # CRIAR
@@ -145,6 +236,24 @@ def listar_pacote_id(pacote_id: int, db: Session =  Depends(get_db)):
         raise HTTPException(status_code=404, detail="Pacote não encontrado")
     return db_pacote_id
 
+    # ATUALIZAR
+@app.put("/pacotes/{pacote_id}", response_model=schemas.PacoteResponse)
+def atualizar_pacote(pacote_id: int, updating_pacote: schemas.PacoteCreate, db: Session = Depends(get_db)):
+    db_pacote = crud.update_pacote(db=db, pacote_id=pacote_id, updating_pacote=updating_pacote)
+
+    if db_pacote is None:
+        raise HTTPException(status_code=404, detail="Pacote não encontrado")
+    return db_pacote
+
+    # DELETAR
+@app.delete("/pacotes/{pacote_id}", response_model=schemas.PacoteResponse)
+def deletar_pacote(pacote_id: int, db:Session = Depends(get_db)):
+    db_pacote = crud.delete_pacote(db=db, pacote_id=pacote_id)
+
+    if db_pacote is None:
+        raise HTTPException(status_code=404, detail="Pacote não encontrado")
+    return db_pacote
+
 # MÉTODOS - ENTREGAS
 
     # CRIAR
@@ -165,3 +274,21 @@ def listar_entrega_id(entrega_id: int, db: Session = Depends(get_db)):
     if db_entrega_id is None:
         raise HTTPException(status_code=404, detail="Entrega não encontrada")
     return db_entrega_id
+
+    # ATUALIZAR
+@app.put("/entregas/{entrega_id}", response_model=schemas.EntregaResponse)
+def atualizar_entrega(entrega_id: int, updating_entrega: schemas.EntregaCreate, db: Session = Depends(get_db)):
+    db_entrega = crud.update_entrega(db=db, entrega_id=entrega_id, updating_entrega=updating_entrega)
+
+    if db_entrega is None:
+        raise HTTPException(status_code=404, detail="Entrega não encontrada")
+    return db_entrega
+
+    # DELETAR
+@app.delete("/entregas/{entrega_id}", response_model=schemas.EntregaResponse)
+def deletar_entregas(entrega_id: int, db: Session = Depends(get_db)):
+    db_entrega = crud.delete_entrega(db=db, entrega_id=entrega_id)
+
+    if db_entrega is None:
+        raise HTTPException(status_code=404, detail="Entrega não encontrada")
+    return db_entrega

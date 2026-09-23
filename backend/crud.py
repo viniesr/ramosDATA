@@ -20,6 +20,31 @@ def get_motoristas(db: Session, skip: int = 0, limit: int = 100):
 def get_motorista_by_id(db: Session, motorista_id: int):
     return db.query(models.Motorista).filter(models.Motorista.id == motorista_id).first()
 
+def update_motorista(db: Session, motorista_id: int, updating_motorista: schemas.MotoristaCreate):
+
+    db_motorista = get_motorista_by_id(db, motorista_id)
+
+    if not db_motorista:
+        return None
+
+    db_motorista.nome = updating_motorista.nome
+    db_motorista.cpf = updating_motorista.cpf
+    db_motorista.status = updating_motorista.status
+
+    db.commit()
+    db.refresh(db_motorista)
+    return db_motorista
+
+def delete_motorista(db: Session, motorista_id: int):
+    db_motorista = get_motorista_by_id(db,motorista_id)
+
+    if not db_motorista:
+        return None
+
+    db.delete(db_motorista)
+    db.commit()
+    return db_motorista
+
 def create_vendedor(db: Session, vendedor: schemas.VendedorCreate):
     db_vendedor = models.Vendedor(
         nome=vendedor.nome,
@@ -38,6 +63,30 @@ def get_vendedores(db: Session, skip: int=0, limit: int=100):
 def get_vendedor_by_id(db: Session, vendedor_id: int):
     return db.query(models.Vendedor).filter(models.Vendedor.id == vendedor_id).first()
 
+def update_vendedor(db:Session, vendedor_id: int, updating_vendedor: schemas.VendedorCreate):
+    db_vendedor = get_vendedor_by_id(db, vendedor_id)
+
+    if not db_vendedor:
+        return None
+
+    db_vendedor.nome = updating_vendedor.nome
+    db_vendedor.loja = updating_vendedor.loja
+    db_vendedor.status = updating_vendedor.status
+
+    db.commit()
+    db.refresh(db_vendedor)
+    return db_vendedor
+
+def delete_vendedor(db:Session, vendedor_id: int):
+    db_vendedor = get_vendedor_by_id(db,vendedor_id)
+
+    if not db_vendedor:
+        return None
+
+    db.delete(db_vendedor)
+    db.commit()
+    return db_vendedor
+
 def create_ajudante(db: Session, ajudante: schemas.AjudanteCreate):
     db_ajudante = models.Ajudante(
         nome=ajudante.nome,
@@ -55,6 +104,30 @@ def get_ajudantes(db: Session, skip: int=0, limit: int=100):
 
 def get_ajudante_by_id(db:Session, ajudante_id: int):
     return db.query(models.Ajudante).filter(models.Ajudante.id == ajudante_id).first()
+
+def update_ajudante(db:Session, ajudante_id: int, updating_ajudante: schemas.AjudanteCreate):
+    db_ajudante = get_ajudante_by_id(db, ajudante_id)
+
+    if not db_ajudante:
+        return None
+
+    db_ajudante.nome = updating_ajudante.nome
+    db_ajudante.cpf = updating_ajudante.cpf
+    db_ajudante.status = updating_ajudante.status
+
+    db.commit()
+    db.refresh(db_ajudante)
+    return db_ajudante
+
+def delete_ajudante(db:Session, ajudante_id: int):
+    db_ajudante = get_ajudante_by_id(db,ajudante_id)
+
+    if not db_ajudante:
+        return None
+
+    db.delete(db_ajudante)
+    db.commit()
+    return db_ajudante
 
 def create_veiculo(db: Session, veiculo: schemas.VeiculoCreate):
     db_veiculo = models.Veiculo(
@@ -75,6 +148,32 @@ def get_veiculos(db: Session, skip: int=0, limit: int=100):
 
 def get_veiculo_by_id(db: Session, veiculo_id: int):
     return db.query(models.Veiculo).filter(models.Veiculo.id == veiculo_id).first()
+
+def update_veiculo(db:Session, veiculo_id: int, updating_veiculo:schemas.VeiculoCreate):
+    db_veiculo = get_veiculo_by_id(db,veiculo_id)
+
+    if not db_veiculo:
+        return None
+
+    db_veiculo.placa = updating_veiculo.placa
+    db_veiculo.marca = updating_veiculo.marca
+    db_veiculo.modelo = updating_veiculo.modelo
+    db_veiculo.ano = updating_veiculo.ano
+    db_veiculo.status = updating_veiculo.status
+
+    db.commit()
+    db.refresh(db_veiculo)
+    return db_veiculo
+
+def delete_veiculo(db:Session, veiculo_id: int):
+    db_veiculo = get_veiculo_by_id(db, veiculo_id)
+
+    if not db_veiculo:
+        return None
+
+    db.delete(db_veiculo)
+    db.commit()
+    return db_veiculo
 
 def create_ciclo(db:Session, ciclo: schemas.CicloCreate):
     db_ciclo = models.Ciclo(
@@ -97,6 +196,33 @@ def get_ciclos(db:Session, skip: int=0, limit: int=100):
 def get_ciclo_by_id(db:Session, ciclo_id: int):
     return db.query(models.Ciclo).filter(models.Ciclo.id == ciclo_id).first()
 
+def update_ciclo(db: Session, ciclo_id: int, updating_ciclo: schemas.CicloCreate):
+    db_ciclo = get_ciclo_by_id(db, ciclo_id)
+
+    if not db_ciclo:
+        return None
+
+    db_ciclo.nome = updating_ciclo.nome
+    db_ciclo.data_inicio = updating_ciclo.data_inicio
+    db_ciclo.data_fim = updating_ciclo.data_fim
+    db_ciclo.cliente = updating_ciclo.cliente
+    db_ciclo.observacao = updating_ciclo.observacao
+    db_ciclo.status = updating_ciclo.status
+
+    db.commit()
+    db.refresh(db_ciclo)
+    return db_ciclo
+
+def delete_ciclo(db:Session, ciclo_id: int):
+    db_ciclo = get_ciclo_by_id(db, ciclo_id)
+
+    if not db_ciclo:
+        return None
+
+    db.delete(db_ciclo)
+    db.commit()
+    return db_ciclo
+
 def create_pacote(db:Session, pacote: schemas.PacoteCreate):
     db_pacote=models.Pacote(
         ciclo_id=pacote.ciclo_id,
@@ -115,6 +241,31 @@ def get_pacotes(db:Session, skip: int=0, limit: int=100):
 
 def get_pacote_by_id(db:Session, pacote_id: int):
     return db.query(models.Pacote).filter(models.Pacote.id == pacote_id).first()
+
+def update_pacote(db: Session, pacote_id: int, updating_pacote: schemas.PacoteCreate):
+    db_pacote = get_pacote_by_id(db,pacote_id)
+
+    if not db_pacote:
+        return None
+
+    db_pacote.ciclo_id = updating_pacote.ciclo_id
+    db_pacote.nome = updating_pacote.nome
+    db_pacote.valor = updating_pacote.valor
+    db_pacote.observacao = updating_pacote.observacao
+
+    db.commit()
+    db.refresh(db_pacote)
+    return db_pacote
+
+def delete_pacote(db: Session, pacote_id: int):
+    db_pacote = get_pacote_by_id(db, pacote_id)
+
+    if not db_pacote:
+        return None
+
+    db.delete(db_pacote)
+    db.commit()
+    return db_pacote
 
 def create_entrega(db:Session, entrega: schemas.EntregaCreate):
     db_entrega=models.Entrega(
@@ -144,3 +295,38 @@ def get_entregas(db:Session, skip: int=0, limit: int=100):
 
 def get_entrega_by_id(db:Session, entrega_id: int):
     return db.query(models.Entrega).filter(models.Entrega.id == entrega_id).first()
+
+def update_entrega(db:Session, entrega_id: int, updating_entrega: schemas.EntregaCreate):
+    db_entrega = get_entrega_by_id(db,entrega_id)
+
+    if not db_entrega:
+        return None
+
+    db_entrega.ciclo_id = updating_entrega.ciclo_id
+    db_entrega.pacote_id = updating_entrega.pacote_id
+    db_entrega.os = updating_entrega.os
+    db_entrega.data = updating_entrega.data
+    db_entrega.destino = updating_entrega.destino
+    db_entrega.uf = updating_entrega.uf
+    db_entrega.veiculo_id = updating_entrega.veiculo_id
+    db_entrega.motorista_id = updating_entrega.motorista_id
+    db_entrega.ajudante_id = updating_entrega.ajudante_id
+    db_entrega.vendedor_id = updating_entrega.vendedor_id
+    db_entrega.valor = updating_entrega.valor
+    db_entrega.peso = updating_entrega.peso
+    db_entrega.observacao = updating_entrega.observacao
+    db_entrega.status = updating_entrega.status
+
+    db.commit()
+    db.refresh(db_entrega)
+    return db_entrega
+
+def delete_entrega(db: Session, entrega_id: int):
+    db_entrega = get_entrega_by_id(db, entrega_id)
+
+    if not db_entrega:
+        return None
+
+    db.delete(db_entrega)
+    db.commit()
+    return db_entrega
