@@ -4,7 +4,7 @@ from typing import Optional
 class MotoristaBase(BaseModel):
     nome: str
     cpf: Optional[str] = None
-    status: int = 1
+    status: str = "Ativo"
 
 class MotoristaCreate(MotoristaBase):
     pass
@@ -18,7 +18,7 @@ class MotoristaResponse(MotoristaBase):
 class VendedorBase(BaseModel):
     nome: str
     loja: Optional[str] = None
-    status: int = 1
+    status: str = "Ativo"
 
 class VendedorCreate(VendedorBase):
     pass
@@ -32,7 +32,7 @@ class VendedorResponse(VendedorBase):
 class AjudanteBase(BaseModel):
     nome: str
     cpf: Optional[str] = None
-    status: int = 1
+    status: str = "Ativo"
 
 class AjudanteCreate(AjudanteBase):
     pass
@@ -48,7 +48,7 @@ class VeiculoBase(BaseModel):
     marca: Optional[str] = None
     modelo: str
     ano: Optional[int] = None
-    status: int = 1
+    status: str = "Ativo"
 
 class VeiculoCreate(VeiculoBase):
     pass

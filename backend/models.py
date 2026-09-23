@@ -8,7 +8,7 @@ class Motorista(Base):
     id = Column(Integer, primary_key = True, index = True, autoincrement = True)
     nome = Column(String, nullable=False)
     cpf = Column(String, nullable=True)
-    status = Column(Integer, default=1, nullable=False)
+    status = Column(String, default="Ativo", nullable=False)
 
 class Vendedor(Base):
     __tablename__ = "vendedores"
@@ -16,7 +16,7 @@ class Vendedor(Base):
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     nome = Column(String, nullable=False)
     loja = Column(String, nullable=True)
-    status = Column(Integer, default=1, nullable=False)
+    status = Column(String, default="Ativo", nullable=False)
 
 class Ajudante(Base):
     __tablename__ = "ajudantes"
@@ -24,7 +24,7 @@ class Ajudante(Base):
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     nome = Column(String, nullable=False)
     cpf = Column(String, nullable=True)
-    status = Column(Integer, default=1, nullable=False)
+    status = Column(String, default="Ativo", nullable=False)
 
 class Veiculo(Base):
     __tablename__ = "veiculos"
@@ -34,7 +34,7 @@ class Veiculo(Base):
     marca = Column(String, nullable=True)
     modelo = Column(String, nullable=False)
     ano = Column(Integer, nullable=True)
-    status = Column(Integer, default=1, nullable=False)
+    status = Column(String, default="Ativo", nullable=False)
 
 class Ciclo(Base):
     __tablename__ = "ciclos"
