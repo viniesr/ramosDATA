@@ -1,0 +1,117 @@
+from pydantic import BaseModel
+from typing import Optional
+
+class MotoristaBase(BaseModel):
+    nome: str
+    cpf: Optional[str] = None
+    status: int = 1
+
+class MotoristaCreate(MotoristaBase):
+    pass
+
+class MotoristaResponse(MotoristaBase):
+    id: int
+
+    class Config:
+        from_attributes = True
+
+class VendedorBase(BaseModel):
+    nome: str
+    loja: Optional[str] = None
+    status: int = 1
+
+class VendedorCreate(VendedorBase):
+    pass
+
+class VendedorResponse(VendedorBase):
+    id: int
+
+    class Config:
+        from_attributes = True
+
+class AjudanteBase(BaseModel):
+    nome: str
+    cpf: Optional[str] = None
+    status: int = 1
+
+class AjudanteCreate(AjudanteBase):
+    pass
+
+class AjudanteResponse(AjudanteBase):
+    id: int
+
+    class Config:
+        from_attributes = True
+
+class VeiculoBase(BaseModel):
+    placa: Optional[str] = None
+    marca: Optional[str] = None
+    modelo: str
+    ano: Optional[int] = None
+    status: int = 1
+
+class VeiculoCreate(VeiculoBase):
+    pass
+
+class VeiculoResponse(VeiculoBase):
+    id: int
+
+    class Config:
+        from_attributes = True
+
+class CicloBase(BaseModel):
+    nome: str
+    data_inicio: Optional[str] = None
+    data_fim: Optional[str] = None
+    cliente: Optional[str] = None
+    observacao: Optional[str] = None
+    status: Optional[str] = None
+
+class CicloCreate(CicloBase):
+    pass
+
+class CicloResponse(CicloBase):
+    id: int
+
+    class Config:
+        from_attributes = True
+
+class PacoteBase(BaseModel):
+    ciclo_id: int
+    nome: str
+    valor: Optional[float] = None
+    observacao: Optional[str] = None
+
+class PacoteCreate(PacoteBase):
+    pass 
+
+class PacoteResponse(PacoteBase):
+    id: int
+
+    class Config:
+        from_attributes = True
+
+class EntregaBase(BaseModel):
+    ciclo_id: Optional[int] = None
+    pacote_id: Optional[int] = None
+    os: Optional[str] = None
+    data: str
+    destino: Optional[str] = None
+    uf: Optional[str] = None
+    veiculo_id: Optional[int] = None
+    motorista_id: Optional[int] = None
+    ajudante_id: Optional[int] = None
+    vendedor_id: Optional[int] = None
+    valor: Optional[float] = None
+    peso: Optional[float] = None
+    observacao: Optional[str] = None
+    status: str = "Entregue"
+
+class EntregaCreate(EntregaBase):
+    pass 
+
+class EntregaResponse(EntregaBase):
+    id: int
+
+    class Config:
+        from_attributes = True
